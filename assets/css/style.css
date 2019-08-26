@@ -22,3 +22,13 @@ body {
 input{
     padding: 10px;
 }
+
+#map{
+    z-index: -1;
+
+}
+
+#menuShow,
+#sideBar{
+    z-index: 99;
+}
