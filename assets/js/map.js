@@ -11,9 +11,9 @@ const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v9',
     center: [
-        41.881832, -87.623177
+        -87.623177, 41.881832
     ],
-    zoom: .5
+    zoom: 13.5
 });
 
 map.on('load', function () {
@@ -36,7 +36,7 @@ map.on('load', function () {
 
                         "geometry": {
                             "type": "Point",
-                            "coordinates": [41.86611, -87.61694]
+                            "coordinates": [-87.61694, 41.86611]
                         }
                     }, {
                         "type": "Feature",
@@ -48,28 +48,58 @@ map.on('load', function () {
                         },
                         "geometry": {
                             "type": "Point",
-                            "coordinates": [41.867778, -87.613889]
+                            "coordinates": [-87.613889, 41.867778]
+                        }
+                    }, {
+                        "type": "Feature",
+                        "properties": {
+                            "description": `<h2>Adler Planetarium</h2>`,
+                            'marker-color': '#3bb2d0',
+                            'marker-size': 'large',
+                            'marker-symbol': 'rocket'
+                        },
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [-87.606783, 41.866333]
                         }
                     }
                 ]
             }
         }
     })
-})
 
-const popup = new mapboxgl.Popup({closeButton: false, closeOnClick: false});
+    const popup = new mapboxgl.Popup({closeButton: false, closeOnClick: false});
 
-map.on('mouseenter', 'places', function (e) {
-    map
-        .getCanvas()
-        .style
-        .cursor = 'pointer';
-    const coordinates = e
-        .features[0]
-        .coordinates
-        .slice();
-    const description = e.features[0].properties.description;
+    map.on('mouseenter', 'places', function (e) {
+        map
+            .getCanvas()
+            .style
+            .cursor = 'pointer';
+        const coordinates = e
+            .features[0]
+            .coordinates
+            .slice();
+        const description = e.features[0].properties.description;
 
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0]
+                ? 360
+                : -360;
+        }
+
+        popup
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+
+    });
+    map.on('mouseleave', 'places', function () {
+        map
+            .getCanvas()
+            .style
+            .cursor = '';
+        popup.remove();
+    });
 });
 
 //filters the places
