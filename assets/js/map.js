@@ -60,9 +60,9 @@ function showMarkers() {
         .forEach((marker) => {
             const mark = document.createElement('div');
             mark.className = 'marker';
-
+            mark.id = marker.properties.title;
             new mapboxgl
-                .Marker(marker)
+                .Marker(mark)
                 .setLngLat(marker.geometry.coordinates)
                 .setPopup(new mapboxgl.Popup({offset: 25})
                 // add popups
@@ -78,37 +78,28 @@ function showTitles() {
         .forEach((place) => {
             const location = document.createElement('h3');
             location.className = 'place';
+            location.id = place.properties.title;
             location.textContent = place.properties.title;
-            places.appendChild(location)
+            places.appendChild(location);
         })
 }
 
 showMarkers();
 showTitles();
-//filters the places
-filterText.addEventListener('keyup', () => {
-    let text = filterText
-        .value
-        .toLowerCase();
-    //check to see if the value is in the title
-
-    removeMarkers(text)
-})
-
-//get the ids
+//filters the places get the ids
 function getID(id) {
     return document.getElementById(id);
 }
 //filter the results
-function removeMarkers(text) {
-    //make the number
-    geojson
-        .features
-        .filter((marker) => checkMarker);
-}
 
-function checkMarker() {
-    if (!marker.properties.title.includes(text)) {
-        marker.remove();
+function checkMarker(e) {
+
+    let markers = document.querySelectorAll(".marker");
+    for (let i = 0; i < markers.length; i++) {
+        if (!markers[i].id.includes(e.value)) {
+            markers[i].style.opacity = 0;
+        } else {
+            showMarkers();
+        }
     }
 }
