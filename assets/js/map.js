@@ -2,7 +2,7 @@
 const places = getID('places');
 const putMap = getID('map');
 const menu = getID('menuShow');
-const filterText = getID('filter-text');
+const sideBar = getID('sideBar');
 
 //set up the map
 mapboxgl.accessToken = `pk.eyJ1Ijoib2lrZTI3IiwiYSI6ImNqenNwa3l5cDFvcDYzY281dXBldXl5azgifQ.-WYbnaEx4h2IruyBwpjaVA`;
@@ -151,4 +151,10 @@ function checkMarker(e) {
             places[j].style.display = 'block';
         }
     }
+}
+
+menu.onclick = function () {
+    sideBar
+        .classList
+        .toggle('menuHide');
 }

@@ -11,12 +11,19 @@ body {
 
 #menuShow {
     width: 50px;
+    clear: both;
+    margin-right: 2px;
 }
 
 .menu__bar {
     border: 9px solid #000;
-    width: 50px;
+    max-width: 50px;
     margin-bottom: 2px;
+    margin-right: 2px;
+}
+
+.menuHide{
+    display: none;
 }
 
 input {
@@ -53,6 +60,7 @@ input {
 #sideBar {
     width: 340px;
     background-color: rgba(0, 0, 0, 0.4);
+    float: left;
 }
 
 .place {
