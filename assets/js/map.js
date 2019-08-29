@@ -50,6 +50,46 @@ const geojson = {
                 "type": "Point",
                 "coordinates": [-87.606783, 41.866333]
             }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "title": `The Art Institute`,
+                "description": `https://www.artic.edu/`
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-87.623889, 41.879444]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "title": `Buckingham Fountain`,
+                "description": `https://en.wikipedia.org/wiki/Buckingham_Fountain`
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-87.618944, 41.875792]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "title": `Museum of Contemporary Art`,
+                "description": `https://mcachicago.org/Home`
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-87.6212, 41.8972]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "title": `Water Tower`,
+                "description": `https://en.wikipedia.org/wiki/Chicago_Water_Tower`
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-87.624422, 41.897172]
+            }
         }
     ]
 };
@@ -95,11 +135,20 @@ function getID(id) {
 function checkMarker(e) {
 
     let markers = document.querySelectorAll(".marker");
+    let places = document.querySelectorAll('.place');
     for (let i = 0; i < markers.length; i++) {
-        if (!markers[i].id.includes(e.value)) {
-            markers[i].style.opacity = 0;
+        if (markers[i].id.includes(e.value)) {
+            markers[i].style.opacity = 1;
         } else {
-            showMarkers();
+            markers[i].style.opacity = 0;
+        }
+    }
+
+    for (let j = 0; j < places.length; j++) {
+        if (!places[j].id.includes(e.value)) {
+            places[j].style.display = 'none';
+        } else {
+            places[j].style.display = 'block';
         }
     }
 }
