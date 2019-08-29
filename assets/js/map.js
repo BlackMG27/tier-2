@@ -13,7 +13,7 @@ const map = new mapboxgl.Map({
     center: [
         -87.623177, 41.881832
     ],
-    zoom: 13.5
+    zoom: 13.25
 });
 
 const geojson = {
